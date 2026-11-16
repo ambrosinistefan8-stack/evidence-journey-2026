@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "name": "fictional-venue-information",
+  "description": "Demo venue entrance status.",
+  "networks": [
+    { "name": "venue-record", "front_man": "lookup", "hocon": "./venue-record.network.json" }
+  ],
+  "links": "./links.json",
+  "peer_policy": { "mode": "ask", "allow_origins": [] }
+}

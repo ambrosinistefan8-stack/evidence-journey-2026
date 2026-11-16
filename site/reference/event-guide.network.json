@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "name": "event-guide",
+    "description": "Evidence-grounded explanation of one fictional step-free event journey."
+  },
+  "max_execution_seconds": 100,
+  "max_steps": 4,
+  "llm_config": { "model_name": "alibaba/qwen3.8-flash", "temperature": 0 },
+  "tools": [
+    {
+      "name": "journey_guide",
+      "function": {
+        "description": "Coordinate an event journey advice request with a specialist and site evidence.",
+        "parameters": { "type": "object", "properties": { "inquiry": { "type": "string" } }, "required": ["inquiry"] }
+      },
+      "instructions": "Your first response must call entrance_specialist, passing the requested scenario and the task of reading the website evidence. Do not call website_read_journey yourself. After the specialist responds, report its evidence and uncertainty in three short sentences, with source IDs. These are fictional records.",
+      "tools": ["entrance_specialist"],
+      "downstream_sly_data": [],
+      "upstream_sly_data": []
+    },
+    {
+      "name": "entrance_specialist",
+      "function": {
+        "description": "Assess the date and agreement of supplied entry evidence.",
+        "parameters": { "type": "object", "properties": { "inquiry": { "type": "string" } }, "required": ["inquiry"] }
+      },
+      "instructions": "Call website_read_journey with the exact scenario from your inquiry: missing, confirmed or conflict. Then summarise the dated evidence in two short sentences. A Friday notice cannot confirm Saturday. State if Saturday is unconfirmed, confirmed or conflicting with source IDs. Never invent a record.",
+      "tools": [],
+      "downstream_sly_data": [],
+      "upstream_sly_data": []
+    }
+  ]
+}

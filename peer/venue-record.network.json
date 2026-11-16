@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "name": "venue-record",
+    "description": "Read the fictional venue's entrance record for a given date.",
+    "front_man": "lookup",
+    "evidence_journey_demo": {
+      "version": 1,
+      "records": [
+        {
+          "date": "2026-11-21",
+          "state": "open",
+          "source": {
+            "id": "P01",
+            "de": "Demo-Hallenregister · Samstag",
+            "en": "Demo venue registry · Saturday"
+          }
+        }
+      ]
+    }
+  },
+  "tools": [
+    {
+      "name": "lookup",
+      "function": {
+        "description": "Read the published fictional venue record for a date.",
+        "parameters": {
+          "type": "object",
+          "properties": { "date": { "type": "string" } },
+          "required": ["date"],
+          "additionalProperties": false
+        }
+      },
+      "instructions": "This network publishes a single fictional venue record: on 2026-11-21 the entrance is open, source P01, Demo venue registry · Saturday. Return this record only when the requested date is 2026-11-21. For any other date, say that no record is available. Do not invent any evidence.",
+      "tools": [],
+      "downstream_sly_data": [],
+      "upstream_sly_data": []
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "name": "event-way",
+    "description": "Source-grounded coordination for an event journey.",
+    "front_man": "planner"
+  },
+  "tools": [
+    {
+      "name": "planner",
+      "function": {
+        "description": "Coordinate timetable, mobility and venue evidence for one event journey.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "scenario": { "type": "string", "enum": ["missing", "confirmed", "conflict"] },
+            "preference": { "type": "string", "enum": ["stepFree", "shortWalk"] }
+          },
+          "required": ["scenario", "preference"],
+          "additionalProperties": false
+        }
+      },
+      "instructions": "Consult event, mobility and access. Report missing or contradictory entrance evidence explicitly. Use only the demonstration evidence.",
+      "tools": ["event", "mobility", "access"],
+      "downstream_sly_data": [],
+      "upstream_sly_data": []
+    },
+    {
+      "name": "event",
+      "function": {
+        "description": "Read the event timetable and last acceptable arrival time.",
+        "parameters": { "type": "object", "properties": {}, "additionalProperties": false }
+      },
+      "instructions": "Return the event timetable with its source.",
+      "tools": [],
+      "downstream_sly_data": [],
+      "upstream_sly_data": []
+    },
+    {
+      "name": "mobility",
+      "function": {
+        "description": "Evaluate published sample connections against event timing and access preferences.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "preference": { "type": "string", "enum": ["stepFree", "shortWalk"] },
+            "arriveBy": { "type": "integer" }
+          },
+          "required": ["preference", "arriveBy"],
+          "additionalProperties": false
+        }
+      },
+      "instructions": "Prefer the shortest walking segment among eligible journeys. Exclude unsuitable or late routes.",
+      "tools": [],
+      "downstream_sly_data": [],
+      "upstream_sly_data": []
+    },
+    {
+      "name": "access",
+      "function": {
+        "description": "Resolve entrance status from demo records relevant to the requested date.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "scenario": { "type": "string", "enum": ["missing", "confirmed", "conflict"] },
+            "date": { "type": "string" }
+          },
+          "required": ["scenario", "date"],
+          "additionalProperties": false
+        }
+      },
+      "instructions": "Only accept date-matched entrance evidence. Preserve any conflict between venue and event statements.",
+      "tools": [],
+      "downstream_sly_data": [],
+      "upstream_sly_data": []
+    }
+  ]
+}

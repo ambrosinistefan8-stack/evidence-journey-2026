@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evidence Journey · Model mode</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="top"><a class="brand" href="../"><span class="mark">↳</span>Evidence Journey</a></header>
+<main class="shell">
+  <section class="intro">
+    <h1>Explain an evidence gap.</h1>
+    <p>Use the Cognizant example runtime and a model to explain one fictional journey. Your model provider receives only the selected sample case and the data needed to explain it.</p>
+  </section>
+  <form id="setup" class="technical partner-form">
+    <label for="router">OpenAI-compatible model router</label>
+    <input id="router" type="url" required value="https://api.otari.ai/api/v1" autocomplete="off">
+    <label for="model">Model name</label>
+    <input id="model" required value="alibaba/qwen3.8-flash" maxlength="120" autocomplete="off">
+    <label for="key">Provider key</label>
+    <input id="key" type="password" maxlength="600" autocomplete="off">
+    <p>Use a router your browser may call. The key is held for this run only. Your provider's rates and limits apply.</p>
+    <label for="case">Example evidence</label>
+    <select id="case">
+      <option value="missing">Saturday information missing</option>
+      <option value="confirmed">Venue confirms opening</option>
+      <option value="conflict">Two sources disagree</option>
+    </select>
+    <p><button class="run" type="submit" id="start">Run model explanation</button></p>
+  </form>
+  <section class="technical" aria-labelledby="activity-title">
+    <h2 id="activity-title">Agent activity</h2>
+    <p id="model-status" role="status"></p>
+    <ul id="activity"></ul>
+    <p id="model-answer"></p>
+  </section>
+</main>
+<script type="module" src="./reference-app.mjs"></script>
+</body>
+</html>

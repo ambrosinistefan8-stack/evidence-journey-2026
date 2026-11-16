@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "name": "evidence-journey",
+  "description": "Plan an event journey from explicit event, transit and venue evidence.",
+  "networks": [
+    {
+      "name": "event-way",
+      "front_man": "planner",
+      "hocon": "./event-way.network.json"
+    }
+  ],
+  "links": "./links.json",
+  "peer_policy": { "mode": "ask", "allow_origins": [] }
+}

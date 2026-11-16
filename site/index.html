@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Veranstaltungsweg | Evidence Journey</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main" class="skip" data-de="Zum Inhalt" data-en="Skip to content">Zum Inhalt</a>
+  <header class="top">
+    <a class="brand" href="./"><span class="mark" aria-hidden="true">↳</span><span data-de="Veranstaltungsweg" data-en="Evidence Journey">Veranstaltungsweg</span></a>
+    <button type="button" id="language" class="language" aria-label="Switch to English">EN</button>
+  </header>
+  <main id="main" class="shell">
+    <section class="intro" aria-labelledby="title">
+      <div class="eyebrow" data-de="Lichtwerk Forum · Samstag, 21. November" data-en="Lichtwerk Forum · Saturday, 21 November">Lichtwerk Forum · Samstag, 21. November</div>
+      <h1 id="title" data-de="Weisst du, wie du ankommst?" data-en="Know your way in.">Weisst du, wie du ankommst?</h1>
+      <p data-de="Plane den Weg bis zur richtigen Tür. Sieh, welche Schritte belegt sind und welche du noch abklären musst." data-en="Plan the trip all the way to the door. See which steps have evidence and what you still need to confirm.">Plane den Weg bis zur richtigen Tür. Sieh, welche Schritte belegt sind und welche du noch abklären musst.</p>
+      <p class="demo" data-de="Fiktives Beispiel · keine aktuelle Fahrplanauskunft" data-en="Fictional example · no live travel information">Fiktives Beispiel · keine aktuelle Fahrplanauskunft</p>
+    </section>
+    <section aria-labelledby="planning-title" class="controls">
+      <h2 id="planning-title" class="sr" data-de="Weg planen" data-en="Plan the journey">Weg planen</h2>
+      <div><label for="preference" data-de="Mein Weg" data-en="My route">Mein Weg</label>
+        <select id="preference">
+          <option value="stepFree" data-de="Stufenlose Anreise" data-en="Step-free travel">Stufenlose Anreise</option>
+          <option value="shortWalk" data-de="Kürzerer Fussweg" data-en="Shortest walk">Kürzerer Fussweg</option>
+        </select>
+      </div>
+      <div><label for="scenario" data-de="Beispieldaten zum Eingang" data-en="Example entrance evidence">Beispieldaten zum Eingang</label>
+        <select id="scenario">
+          <option value="missing" data-de="Samstagsinfo fehlt" data-en="Saturday information missing">Samstagsinfo fehlt</option>
+          <option value="confirmed" data-de="Halle bestätigt Öffnung" data-en="Venue confirms it is open">Halle bestätigt Öffnung</option>
+          <option value="conflict" data-de="Zwei Quellen widersprechen sich" data-en="Two sources disagree">Zwei Quellen widersprechen sich</option>
+        </select>
+      </div>
+      <button type="button" id="run" class="run" disabled data-de="Weg prüfen" data-en="Check journey">Weg prüfen</button>
+    </section>
+    <p id="error" role="alert" hidden></p>
+    <div class="result" id="result" hidden>
+      <section class="route" aria-labelledby="route-title">
+        <h2 id="route-title" data-de="Vom Fahrplan bis zur Tür" data-en="From timetable to door">Vom Fahrplan bis zur Tür</h2>
+        <div class="schematic" aria-hidden="true"><span class="track"></span><span class="stop one"></span><span class="stop two"></span><span class="stop three"></span><span class="ribbon"></span><span class="warehouse"></span></div>
+        <ol class="steps" id="steps"></ol>
+      </section>
+      <aside class="proof" aria-labelledby="proof-title">
+        <h2 id="proof-title" data-de="Was du prüfen solltest" data-en="What to check">Was du prüfen solltest</h2>
+        <p id="outcome" class="outcome" aria-live="polite"></p>
+        <p id="explain"></p>
+        <div id="source-list"></div>
+      </aside>
+      <section class="details" aria-labelledby="details-title">
+        <h2 id="details-title" data-de="Weitere Verbindungen" data-en="Other connections">Weitere Verbindungen</h2>
+        <ul id="alternatives"></ul>
+      </section>
+    </div>
+    <details class="technical">
+      <summary data-de="Daten und Ablauf ansehen" data-en="Inspect data and execution">Daten und Ablauf ansehen</summary>
+      <p id="trace"></p>
+      <p><a href="./agent-manifest.json">Agent manifest</a> · <a href="./event-way.network.json">Network JSON</a></p>
+      <p><a href="./reference/" data-de="Modellmodus mit offiziellem Beispiel-Runtime" data-en="Model mode with the official example runtime">Modellmodus mit offiziellem Beispiel-Runtime</a></p>
+      <section id="local-ai" hidden>
+        <h3 data-de="Erklärung mit lokaler KI" data-en="Explanation with local AI">Erklärung mit lokaler KI</h3>
+        <button type="button" id="local-ai-run" class="language" data-de="Auf diesem Computer erklären" data-en="Explain on this computer">Auf diesem Computer erklären</button>
+        <p id="local-ai-status" role="status"></p>
+        <p id="local-ai-output"></p>
+      </section>
+      <form id="partner-form" class="partner-form">
+        <label for="peer" data-de="Adresse des Demo-Hallenregisters" data-en="Demo venue registry address">Adresse des Demo-Hallenregisters</label>
+        <input id="peer" type="url" required autocomplete="off" aria-describedby="partner-hint" spellcheck="false">
+        <p id="partner-hint" data-de="Das Register liefert einen zusätzlichen fiktiven Beleg. Die Abfrage sendet keine Reiseauswahl." data-en="The registry adds fictional evidence. The request does not send your journey choices.">Das Register liefert einen zusätzlichen fiktiven Beleg. Die Abfrage sendet keine Reiseauswahl.</p>
+        <button type="submit" id="partner-run" class="language" data-de="Demo-Hallenregister abfragen" data-en="Query demo venue registry">Demo-Hallenregister abfragen</button>
+        <button type="button" id="partner-remove" class="language" disabled data-de="Zusatzbeleg entfernen" data-en="Remove extra evidence">Zusatzbeleg entfernen</button>
+        <p id="partner-status" role="status"></p>
+      </form>
+    </details>
+  </main>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
