@@ -13,7 +13,7 @@
         "description": "Coordinate an event journey advice request with a specialist and site evidence.",
         "parameters": { "type": "object", "properties": { "inquiry": { "type": "string" } }, "required": ["inquiry"] }
       },
-      "instructions": "Your first response must call entrance_specialist, passing the requested scenario and the task of reading the website evidence. Do not call website_read_journey yourself. After the specialist responds, report its evidence and uncertainty in three short sentences, with source IDs. These are fictional records.",
+      "instructions": "Your first response must call entrance_specialist, passing the requested scenario, the task of reading the website evidence and whether the separate demo venue agent was explicitly requested. Do not call website_read_journey yourself. After the specialist responds, report its evidence and uncertainty in three short sentences, with source IDs. These are fictional records.",
       "tools": ["entrance_specialist"],
       "downstream_sly_data": [],
       "upstream_sly_data": []
@@ -24,8 +24,8 @@
         "description": "Assess the date and agreement of supplied entry evidence.",
         "parameters": { "type": "object", "properties": { "inquiry": { "type": "string" } }, "required": ["inquiry"] }
       },
-      "instructions": "Call website_read_journey with the exact scenario from your inquiry: missing, confirmed or conflict. Then summarise the dated evidence in two short sentences. A Friday notice cannot confirm Saturday. State if Saturday is unconfirmed, confirmed or conflicting with source IDs. Never invent a record.",
-      "tools": [],
+      "instructions": "Call website_read_journey with the exact scenario from your inquiry: missing, confirmed or conflict. If the inquiry explicitly asks for the separate demo venue agent, also call venue_record to check 2026-11-21. Summarise dated evidence and uncertainty with source IDs. A Friday notice cannot confirm Saturday. Never invent a record.",
+      "tools": ["https://veranstaltungsweg-venue-record.vercel.app/venue-record"],
       "downstream_sly_data": [],
       "upstream_sly_data": []
     }

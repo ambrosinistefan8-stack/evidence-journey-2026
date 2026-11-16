@@ -4,7 +4,7 @@
     { "name": "event-guide", "front_man": "journey_guide", "hocon": "./event-guide.network.json" }
   ],
   "llm_router": { "base_url": "https://api.otari.ai/api/v1", "mock": false },
-  "allowed_peers": [],
+  "allowed_peers": ["https://veranstaltungsweg-venue-record.vercel.app"],
   "peer_policy": { "mode": "closed", "deny_origins": [] },
   "actions": { "version": 1, "module": "./journey-actions.mjs", "agentTools": ["read_journey"] },
   "deployment": { "mode": "static", "direct_byok": true }

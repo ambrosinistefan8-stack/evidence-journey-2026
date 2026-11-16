@@ -3,6 +3,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Evidence Journey · Model mode</title>
 <link rel="stylesheet" href="../style.css">
+<style>.partner-form input[type="checkbox"]{display:inline-block;width:auto;vertical-align:middle;margin-right:.4em}</style>
 </head>
 <body>
 <header class="top"><a class="brand" href="../"><span class="mark">↳</span>Evidence Journey</a></header>
@@ -25,6 +26,8 @@
       <option value="confirmed">Venue confirms opening</option>
       <option value="conflict">Two sources disagree</option>
     </select>
+    <label><input id="use-peer" type="checkbox"> Also consult the separate demo venue agent</label>
+    <p>The browser asks before contacting the public venue site. Its network then runs on the model provider you selected; that provider's rates and limits apply. This adds a fictional Saturday record.</p>
     <p><button class="run" type="submit" id="start">Run model explanation</button></p>
   </form>
   <section class="technical" aria-labelledby="activity-title">
